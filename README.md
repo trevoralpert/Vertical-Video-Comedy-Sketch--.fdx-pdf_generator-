@@ -35,5 +35,5 @@ This tool is designed to assist YouTube creators in generating video scripts qui
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/trevoralpert/Youtube-Script-Writing-tool.git
+   git clone [https://github.com/trevoralpert/Youtube-Script-Writing-tool.git](https://github.com/trevoralpert/Youtube-Scipt-Writing-tool/tree/main)
    cd Project #8 - Youtube Script Writing Tool
