@@ -1,5 +1,5 @@
 import streamlit as st
-from .utils2 import generate_script
+from utils2 import generate_script
 
 # Applying Styling
 st.markdown("""
