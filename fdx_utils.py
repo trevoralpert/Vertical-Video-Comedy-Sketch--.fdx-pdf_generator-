@@ -112,6 +112,11 @@ def parse_screenplay_blocks(script_text: str) -> list[tuple[str, str]]:
             i += 1
             continue
 
+        if line.upper().strip() == "END":
+            blocks.append(("End of Act", line))
+            i += 1
+            continue
+
         if line.startswith("INT.") or line.startswith("EXT."):
             blocks.append(("Scene Heading", line))
             i += 1
