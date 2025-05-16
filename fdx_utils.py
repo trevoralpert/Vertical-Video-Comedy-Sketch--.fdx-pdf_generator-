@@ -90,6 +90,7 @@ def extract_formatted_screenplay_from_fdx(filepath: str) -> str:
 def parse_screenplay_blocks(script_text: str) -> list[tuple[str, str]]:
     """
     Smarter screenplay parser that handles multiline dialogue and parentheticals.
+    Removes unnecessary blank 'General' lines that cause spacing issues.
     """
     lines = script_text.splitlines()
     blocks = []
@@ -99,7 +100,15 @@ def parse_screenplay_blocks(script_text: str) -> list[tuple[str, str]]:
         line = lines[i].strip()
 
         if not line:
-            blocks.append(("General", ""))
+            # Peek ahead to see if next line is another blank or structural block
+            lookahead = i + 1
+            while lookahead < len(lines) and not lines[lookahead].strip():
+                lookahead += 1
+            if lookahead < len(lines):
+                next_line = lines[lookahead].strip()
+                #if next_line.upper() == next_line and len(next_line.split()) <= 4:
+                    # Next line is likely a Character block — keep the space
+                 #   blocks.append(("General", ""))
             i += 1
             continue
 
@@ -109,20 +118,19 @@ def parse_screenplay_blocks(script_text: str) -> list[tuple[str, str]]:
             continue
 
         if line.upper() == line and len(line.split()) <= 4:
-            # It's a character name
             blocks.append(("Character", line))
             i += 1
 
-            # Check for optional parenthetical
+            # Optional parenthetical
             if i < len(lines) and lines[i].strip().startswith("(") and lines[i].strip().endswith(")"):
                 blocks.append(("Parenthetical", lines[i].strip()))
                 i += 1
 
-            # Accumulate dialogue lines until next paragraph
+            # Gather dialogue lines
             dialogue_lines = []
             while i < len(lines):
                 next_line = lines[i].strip()
-                if not next_line or next_line.upper() == next_line and len(next_line.split()) <= 4:
+                if not next_line or (next_line.upper() == next_line and len(next_line.split()) <= 4):
                     break
                 dialogue_lines.append(next_line)
                 i += 1
@@ -139,7 +147,6 @@ def parse_screenplay_blocks(script_text: str) -> list[tuple[str, str]]:
         i += 1
 
     return blocks
-
 
 
 def apply_inline_styles(text: str) -> list[tuple[str, str]]:
