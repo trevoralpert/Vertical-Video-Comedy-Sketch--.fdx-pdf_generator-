@@ -1,39 +1,45 @@
-# YouTube Script Writing Tool 🎥
+# Vertical-Video-Comedy-Sketch--.fdx-pdf_generator-
 
-A Streamlit-based application that helps creators generate engaging YouTube video scripts. By leveraging OpenAI's language models and DuckDuckGo search results, the app creates optimized video scripts based on user-defined topics, creativity levels, and desired video lengths.
+**An AI-powered app that writes and formats comedy sketches for TikTok, Instagram Reels, and YouTube Shorts in screenplay style.**
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup and Installation](#setup-and-installation)
-- [Usage](#usage)
-- [Example Scenarios](#example-scenarios)
-- [Contributing](#contributing)
-- [License](#license)
+---
 
-## Overview
+## 🎭 Overview
 
-This tool is designed to assist YouTube creators in generating video scripts quickly and efficiently. By combining natural language processing with search engine data, the app provides scripts tailored to specific topics and desired video lengths, all while allowing users to adjust the creativity level.
+This Streamlit application generates short, punchy comedy sketches formatted like professional screenplays. It allows users to customize characters, input a topic or generate a random one, and select sketch duration. Once generated, sketches can be exported as `.txt`, `.pdf`, and `.fdx` (Final Draft) files with precise formatting that mimics industry standards.
 
-## Features
+---
 
-- Generate YouTube video titles and scripts.
-- Use DuckDuckGo search data to improve script relevance and depth.
-- Adjustable creativity levels for varied script tones.
-- Intuitive Streamlit interface for user-friendly interactions.
+## 🚀 Features
 
-## Technologies Used
+- ✍️ **AI-generated screenplays** tailored to vertical-video platforms
+- 🎯 Control over **topic, duration, and characters**
+- 🎬 Export to:
+  - `.txt` (plain text)
+  - `.pdf` (screenplay-formatted, readable)
+  - `.fdx` (Final Draft industry-standard format)
+- 🧠 **Topic history** and creative regeneration tools
+- 🧑‍🤝‍🧑 Custom character creation
+- 📁 Upload your own `.fdx` files and embed them into the reference library
 
-- **Python**: Core programming language.
-- **Streamlit**: For building the web interface.
-- **LangChain**: For managing prompts and chains.
-- **OpenAI GPT**: For generating video titles and scripts.
-- **DuckDuckGo Search**: For enriching script content with search results.
+---
 
-## Setup and Installation
+## 📸 Screenshots
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/trevoralpert/Youtube-Scipt-Writing-tool.git
-   cd Project #8 - Youtube Script Writing Tool
+### Topic & Generation Panel
+![Topic selection and creativity controls](./screenshots/Screenshot1.png)
+
+### Output & Export Panel
+![Generated sketch with export buttons](./screenshots/Screenshot2.png)
+
+### Side-by-Side Exports (Text, PDF, Final Draft)
+![Export formats preview](./screenshots/Screenshot3.png)
+
+---
+
+## 🧱 Requirements
+
+Install the dependencies using:
+
+```bash
+pip install -r requirements.txt
