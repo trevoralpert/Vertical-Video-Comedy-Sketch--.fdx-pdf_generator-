@@ -1,7 +1,7 @@
 # Vertical-Video-Comedy-Sketch--.fdx-pdf_generator-
 
 <p align="center">
-  <img src="./screenshots/Screenshot2.png" alt="App Screenshot" width="400"/>
+  <img src="./screenshots/Screenshot1.png" alt="App Screenshot" width="400"/>
 </p>
 
 <p align="center">
