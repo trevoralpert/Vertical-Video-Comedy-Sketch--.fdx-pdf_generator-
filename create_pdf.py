@@ -2,6 +2,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import tempfile
 import textwrap
+from fdx_utils import parse_screenplay_blocks
 
 def create_screenplay_pdf(script_text: str, filename: str) -> str:
     pdf_path = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf").name
@@ -19,75 +20,59 @@ def create_screenplay_pdf(script_text: str, filename: str) -> str:
 
     y = height - top_margin
     c.setFont("Courier", 12)
-    lines = script_text.splitlines()
-    previous_type = None
+    blocks = parse_screenplay_blocks(script_text)
 
-    for line in lines:
-        stripped = line.strip()
-
-        if not stripped:
-            y -= line_height
-            previous_type = None
-            continue
-
-        # Determine paragraph type
-        if stripped.startswith("INT.") or stripped.startswith("EXT."):
-            ptype = "Scene Heading"
-        elif stripped.startswith("(") and stripped.endswith(")"):
-            ptype = "Parenthetical"
-        elif stripped.upper() == stripped and len(stripped.split()) <= 4:
-            ptype = "Character"
-        elif previous_type in ("Character", "Parenthetical"):
-            ptype = "Dialogue"
-        else:
-            ptype = "Action"
-
-        # Insert extra spacing between blocks
-        if previous_type == "Dialogue" and ptype == "Action":
-            y -= line_height
-
+    for ptype, text in blocks:
         if y < bottom_margin:
             c.showPage()
             c.setFont("Courier", 12)
             y = height - top_margin
 
-        # Rendering based on type
         if ptype == "Scene Heading":
             max_chars = int((width - left_margin - right_margin) // char_width)
-            wrapped = textwrap.wrap(stripped, width=max_chars)
+            wrapped = textwrap.wrap(text, width=max_chars)
             for wline in wrapped:
                 c.drawString(left_margin, y, wline)
                 y -= line_height
+            y -= line_height  # Extra space after scene heading
 
         elif ptype == "Action":
-            # Give ~2 more chars room than before (previously width = 90 chars, now ~92)
             max_chars = int((width - left_margin - right_margin + 10) // char_width)
-            wrapped = textwrap.wrap(stripped, width=max_chars)
+            wrapped = textwrap.wrap(text, width=max_chars)
             for wline in wrapped:
                 c.drawString(left_margin, y, wline)
                 y -= line_height
+            y -= line_height  # Extra space after action
 
         elif ptype == "Character":
-            c.drawCentredString(width / 2, y, stripped)
+            c.drawCentredString(width / 2, y, text)
             y -= line_height
+            # No extra space after character
 
         elif ptype == "Parenthetical":
             indent = left_margin + 160  # shifted ~1 tab further right
             max_chars = int((width - indent - right_margin) // char_width)
-            wrapped = textwrap.wrap(stripped, width=max_chars)
+            wrapped = textwrap.wrap(text, width=max_chars)
             for wline in wrapped:
                 c.drawString(indent, y, wline)
                 y -= line_height
+            # No extra space after parenthetical
 
         elif ptype == "Dialogue":
             indent = left_margin + 100
             max_chars = int((width - indent - right_margin) // char_width)
-            wrapped = textwrap.wrap(stripped, width=max_chars)
+            wrapped = textwrap.wrap(text, width=max_chars)
             for wline in wrapped:
                 c.drawString(indent, y, wline)
                 y -= line_height
+            y -= line_height  # Extra space after dialogue
 
-        previous_type = ptype
+        elif ptype == "General":
+            y -= line_height  # blank line
+
+        elif ptype == "End of Act":
+            c.drawCentredString(width / 2, y, text)
+            y -= line_height
 
     c.save()
     return pdf_path

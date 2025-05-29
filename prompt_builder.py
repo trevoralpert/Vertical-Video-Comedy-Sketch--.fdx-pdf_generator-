@@ -27,6 +27,8 @@ def build_prompt(topic: str, characters: list[str], duration: int, reference_scr
     Use spaces to indent characters, dialogue, and parentheticals in the same style.
     Do not invent formatting — match it exactly.
 
+    - Only capitalize a character's name the first time it appears in an action line. For all subsequent mentions in action lines, use normal proper noun capitalization (e.g., "Trevor" not "TREVOR").
+    - Character names should always be in ALL CAPS when used as the speaker heading for dialogue.
     """
 
     return prompt.strip()

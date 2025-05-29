@@ -2,6 +2,7 @@
 import os
 import random
 from dotenv import load_dotenv
+import io
 
 # ✅ DO THIS FIRST: Streamlit import and config
 import streamlit as st
@@ -18,19 +19,13 @@ from pinecone_utils import fetch_reference_script
 
 import tempfile
 import zipfile
-import io
 from io import StringIO
-import base64
-
-from openai_utils import zip_fdx #create_pdf
-from pinecone_utils import embed_and_store_script
-from fdx_utils import create_fdx, extract_screenplay_text_from_fdx
-from fdx_utils import extract_formatted_screenplay_from_fdx, create_pdf
-from openai_utils import generate_creative_title
 import re
 
-import subprocess
-
+from pinecone_utils import embed_and_store_script
+from fdx_utils import create_fdx, extract_screenplay_text_from_fdx
+from fdx_utils import extract_formatted_screenplay_from_fdx
+from openai_utils import generate_creative_title
 from create_pdf import create_screenplay_pdf
 
 def slugify(title: str) -> str:
