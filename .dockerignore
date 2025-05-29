@@ -1,0 +1,24 @@
+# flyctl launch added from .gitignore
+**/.env
+
+# flyctl launch added from .venv/.gitignore
+.venv/**/*
+
+# flyctl launch added from .venv/lib/python3.12/site-packages/gradio/_frontend_code/lite/.gitignore
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/lite/src/theme.css
+
+# flyctl launch added from .venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/.gitignore
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/.eggs
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/dist
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/*.pyc
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/__pycache__
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/*.py[cod]
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/*$py.class
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/__tmp/*
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/*.pyi
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/preview/test/test/**/node_modules
+
+# flyctl launch added from .venv/lib/python3.12/site-packages/gradio/_frontend_code/theme/.gitignore
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/theme/**/*/pollen.css
+.venv/lib/python3.12/site-packages/gradio/_frontend_code/theme/**/*/theme.css
+fly.toml
